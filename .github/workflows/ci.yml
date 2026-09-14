@@ -35,7 +35,7 @@ jobs:
       - name: Install and cache test dependencies
         uses: potatoqualitee/psmodulecache@9e4b63833c22c1768d648e115a9c849afdda22a5 # v6.3
         with:
-          modules-to-cache: BuildHelpers, Pester
+          modules-to-cache: BuildHelpers:2.0.1, Pester:5.7.1
           shell: ${{ matrix.shell }}
       - name: Run tests
         run: |

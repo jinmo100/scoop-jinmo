@@ -39,3 +39,4 @@ Skill 使用正向铁律、五阶段清单和每阶段完成条件，固化以�
 - frontmatter 仅包含 `name` 与 `description`；正文包含铁律、阶段清单、完成条件、反模式、报告格式和最终检查表。
 - 项目 Note tree、Note format 与 archived-note 校验均通过。
 - Skill 内容已结合已验证的 Any Listen prerelease 流程、GitHub Actions 成功运行结果、PowerShell 5.1/7 差异和当前 Bucket 脚本结构编写。
+- CI 将 `BuildHelpers` 与 `Pester` 固定到兼容版本（`2.0.1` / `5.7.1`），避免 `psmodulecache` 自动取得 Pester 6 后与 Scoop 的 `Import-Bucket-Tests.ps1` 发生空测试集合兼容错误。
