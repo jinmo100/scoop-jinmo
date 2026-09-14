@@ -46,3 +46,5 @@ Any Listen 的 `checkver` 直接读取 GitHub Releases API（`per_page=100`）�
 - Manifest 的 `0.9.0-beta.4`、x64 green asset URL 和 SHA256 与 GitHub Release API 的 `digest` 一致。
 - 在 Windows PowerShell 5.1 中使用 `SCOOP_GH_TOKEN` 执行 `bin/checkver.ps1 any-listen-desktop`，结果为 `0.9.0-beta.4`。
 - 使用临时的 beta.3 Manifest 执行 `checkver -Update`，验证了完整的 `-beta.4` URL、版本号和 digest 会被自动写回。
+- 推送到 `https://github.com/jinmo100/scoop-jinmo` 后，GitHub Actions 的 CI push run 成功，手动触发的 Excavator run 也成功且没有产生无关更新。
+- 宿主机执行 `scoop bucket add jinmo ...` 与 `scoop info jinmo/any-listen-desktop` 成功；使用 PowerShell 7 的 Scoop 实际安装成功，`anylisten.exe` shim、快捷方式和应用根目录可执行文件均已验证。Windows PowerShell 5.1 在本机缺少 `Get-FileHash`，导致第一次 hash 校验失败；这属于宿主 PowerShell 环境问题，改用 `pwsh` 后校验与安装成功。
