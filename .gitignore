@@ -1,0 +1,7 @@
+*.sublime-workspace
+*~
+._*
+page.html
+checkver-*.html
+AGENT.md
+.codegraph/
