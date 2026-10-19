@@ -23,6 +23,16 @@ scoop uninstall any-listen-desktop
 scoop install jinmo/any-listen-desktop
 ```
 
+## Install AyuGram-Jinmo test builds
+
+This manifest follows the newest non-draft GitHub prerelease of [jinmo100/AyuGramDesktop](https://github.com/jinmo100/AyuGramDesktop), a personal AyuGram fork. The published archives are Windows x64 portable **Debug test builds** with the built-in updater disabled; version updates go through Scoop only.
+
+```powershell
+scoop install jinmo/ayugram-jinmo
+```
+
+Account data lives in `persist\ayugram-jinmo\TelegramForcePortable\tdata`, so `scoop update ayugram-jinmo` keeps the logged-in session. Quit the application before updating.
+
 ## Update
 
 Update Scoop and the local bucket clone:
