@@ -33,6 +33,18 @@ scoop install jinmo/ayugram-jinmo
 
 Account data lives in `persist\ayugram-jinmo\TelegramForcePortable\tdata`, so `scoop update ayugram-jinmo` keeps the logged-in session. Quit the application before updating.
 
+## Install DSH Tauri (community DeepSeek Harness desktop)
+
+`dsh-tauri` packages the community Tauri desktop build of [DeepSeek Harness](https://github.com/dsh-tauri/deepseek-harness-desktop). The package name follows the upstream product name (`DSH Tauri`) rather than the repository name, because many projects are called `deepseek-harness-desktop` and DeepSeek also ships its own [official desktop app](https://www.deepseek.com/harness).
+
+```powershell
+scoop install jinmo/dsh-tauri
+```
+
+The manifest unpacks the vendor MSI into the Scoop app directory. Runtime and user data stay outside it (`%APPDATA%\dsh-tauri` and `%USERPROFILE%\.dsh`), so `scoop update dsh-tauri` keeps settings and sessions.
+
+After the first launch, turn off **Settings → Auto update**: the built-in updater runs the vendor installer and would create a second, non-Scoop installation. Update with `scoop update dsh-tauri` instead. The first launch still downloads the Node runtime and Harness core, and the embedded UI needs the WebView2 Runtime.
+
 ## Update
 
 Update Scoop and the local bucket clone:

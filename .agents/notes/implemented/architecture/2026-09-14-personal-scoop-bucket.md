@@ -8,7 +8,7 @@ Scoop 的公共 Bucket 不一定包含用户需要的软件，或只包含正式
 
 ## Decision
 
-个人 Bucket 使用 `jinmo100/scoop-jinmo`，遵循 `ScoopInstaller/BucketTemplate` 的结构，包含官方 CI 与 Excavator workflow；Excavator 每 4 小时检查一次 Manifest，发现更新后提交版本、URL 和 hash 变更。当前维护的 Manifest：`any-listen-desktop`（跟随 GitHub prerelease 的 x64 green 归档）、`kikoplay`、`diceframe`、`pideck`（跟随上游正式版）、`ayugram-jinmo`（跟随本机手工构建的 fork 测试版）。
+个人 Bucket 使用 `jinmo100/scoop-jinmo`，遵循 `ScoopInstaller/BucketTemplate` 的结构，包含官方 CI 与 Excavator workflow；Excavator 每 4 小时检查一次 Manifest，发现更新后提交版本、URL 和 hash 变更。当前维护的 Manifest：`any-listen-desktop`（跟随 GitHub prerelease 的 x64 green 归档）、`kikoplay`、`diceframe`、`pideck`、`dsh-tauri`（跟随上游正式版）、`ayugram-jinmo`（跟随本机手工构建的 fork 测试版）。
 
 Any Listen 的 `checkver` 直接读取 GitHub Releases API（`per_page=100`），筛选非 draft 的 prerelease，按 `published_at` 倒序取最新版本，再提取完整的 prerelease 版本号（例如 `0.9.0-beta.4`）。`autoupdate` 使用 `$version` 生成完整的 Release asset URL，不使用会丢失 `-beta.N` 的 `$matchHead`。Scoop 的 GitHub hash 处理逻辑读取对应 asset 的 digest，失败时可退回本地计算。
 
