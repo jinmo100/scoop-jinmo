@@ -45,6 +45,20 @@ The manifest unpacks the vendor MSI into the Scoop app directory. Runtime and us
 
 After the first launch, turn off **Settings → Auto update**: the built-in updater runs the vendor installer and would create a second, non-Scoop installation. Update with `scoop update dsh-tauri` instead. The first launch still downloads the Node runtime and Harness core, and the embedded UI needs the WebView2 Runtime.
 
+## Install Legado Reader
+
+`legado-reader` packages [hadc188/reader](https://github.com/hadc188/reader), a community desktop port of the Android **Legado (阅读 3.0)** reader. It is a single-user local reader: it imports Legado book sources, RSS feeds and backups, but ships no book sources and runs no server.
+
+```powershell
+scoop install jinmo/legado-reader
+```
+
+The package is deliberately called `legado-reader` instead of `reader`. A plain `reader` manifest already exists in other buckets for a different program (`binbyu/Reader`, which also installs `Reader.exe`), and Scoop resolves app names across all buckets: with a duplicate it only prints a warning and picks the first bucket. The Start Menu entry is `Reader (Legado)` for the same reason — Scoop names the shortcut file after the display name, so a bare `Reader` would overwrite the other program's shortcut and could be removed by its uninstall.
+
+Library data lives in `persist\legado-reader\data`, so `scoop update legado-reader` keeps books, sources and settings. If you previously installed the vendor setup or the winget package, its `data` folder sits next to that copy's `Reader.exe`; copy it into the persist folder before the first launch.
+
+Update through Scoop, not through the app. The in-app update button replaces `Reader.exe` inside the Scoop version directory without updating Scoop's metadata; turning off **Auto check updates** (自动检查更新) in Settings avoids the prompt. The app is x64 only and needs the WebView2 Runtime.
+
 ## Update
 
 Update Scoop and the local bucket clone:
