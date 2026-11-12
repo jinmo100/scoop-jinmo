@@ -59,6 +59,18 @@ Library data lives in `persist\legado-reader\data`, so `scoop update legado-read
 
 Update through Scoop, not through the app. The in-app update button replaces `Reader.exe` inside the Scoop version directory without updating Scoop's metadata; turning off **Auto check updates** (自动检查更新) in Settings avoids the prompt. The app is x64 only and needs the WebView2 Runtime.
 
+## Install DS Bot
+
+`ds-bot` packages [Fei2411/DS-Bot](https://github.com/Fei2411/DS-Bot), a desktop app that runs a team of long-lived bots on top of DeepSeek Harness: main bots, private bots, bot-to-bot messages and group chats. Upstream publishes **only** an NSIS installer for Windows, so the manifest downloads it, has Scoop unpack the NSIS container with 7-Zip (`#/dl.7z`) and expands the inner `app-64.7z` in `pre_install`. What lands in the Scoop app directory is a plain `win-unpacked` layout: no registry entries, no Start Menu entry beyond Scoop's own shortcut, and no elevation prompt.
+
+```powershell
+scoop install jinmo/ds-bot
+```
+
+The app carries its own DSH runtime (291 MiB download, about 1.2 GB unpacked), so neither Node.js nor `dsh` has to be installed first; on the first launch you only configure a model in Settings. Models, bots and chats live in `%USERPROFILE%\.ds-bot`, the bot workspace in `%USERPROFILE%\DS Bot` and logs in `%APPDATA%\DS Bot` — nothing is written to the install directory, so `scoop update ds-bot` keeps everything.
+
+`pre_install` deletes `resources\app-update.yml`. The bundled `electron-updater` feed points at GitHub releases, sets `autoDownload` and `autoInstallOnAppQuit`, and has no off switch in the UI: left in place it would download the vendor installer and create a second, non-Scoop installation. The visible cost is that the About page reports a failed update check every few hours; update with Scoop instead. The app is x64 only, and uninstalling leaves `%USERPROFILE%\.ds-bot`, `%USERPROFILE%\DS Bot` and `%APPDATA%\DS Bot` behind.
+
 ## Update
 
 Update Scoop and the local bucket clone:
