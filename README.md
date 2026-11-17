@@ -71,6 +71,16 @@ The app carries its own DSH runtime (291 MiB download, about 1.2 GB unpacked), s
 
 `pre_install` deletes `resources\app-update.yml`. The bundled `electron-updater` feed points at GitHub releases, sets `autoDownload` and `autoInstallOnAppQuit`, and has no off switch in the UI: left in place it would download the vendor installer and create a second, non-Scoop installation. The visible cost is that the About page reports a failed update check every few hours; update with Scoop instead. The app is x64 only, and uninstalling leaves `%USERPROFILE%\.ds-bot`, `%USERPROFILE%\DS Bot` and `%APPDATA%\DS Bot` behind.
 
+## Install Winc
+
+`winc` packages [DEEIX-AI/Winc](https://github.com/DEEIX-AI/Winc), a Rust text editor with its own rendering engine. Upstream ships a Windows x64 portable ZIP, so the manifest unpacks it as-is and keeps `data` in the persist folder.
+
+```powershell
+scoop install jinmo/winc
+```
+
+Settings, recently opened folders and backups of unsaved changes live in `persist\winc\data`, so `scoop update winc` keeps them. The portable build leaves the built-in updater disabled; `checkver` and `autoupdate` follow the GitHub releases, so updates come through Scoop only. Winc needs Windows 10 1809 or later and the Visual C++ 2015-2022 runtime (`extras/vcredist2022`); the portable `winc.exe` is unsigned, so SmartScreen may warn on the first launch. On Windows, Winc can open folders inside WSL distributions.
+
 ## Update
 
 Update Scoop and the local bucket clone:
