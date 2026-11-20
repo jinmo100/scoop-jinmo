@@ -81,6 +81,28 @@ scoop install jinmo/winc
 
 Settings, recently opened folders and backups of unsaved changes live in `persist\winc\data`, so `scoop update winc` keeps them. The portable build leaves the built-in updater disabled; `checkver` and `autoupdate` follow the GitHub releases, so updates come through Scoop only. Winc needs Windows 10 1809 or later and the Visual C++ 2015-2022 runtime (`extras/vcredist2022`); the portable `winc.exe` is unsigned, so SmartScreen may warn on the first launch. On Windows, Winc can open folders inside WSL distributions.
 
+## Open with Winc
+
+Three opt-in scripts under `bin\winc\` wire Winc into Explorer and DSH. They only write HKCU, so they need no elevation, and each takes `-Uninstall` and `-DryRun`.
+
+```powershell
+# Right-click "Open with Winc" for folders, folder backgrounds and files
+.\bin\winc\context-menu.ps1
+
+# Add Winc to the "Open with" list for common code and text formats
+.\bin\winc\file-associations.ps1
+
+# Optionally make Winc the default for those formats (Windows may ask once)
+.\bin\winc\file-associations.ps1 -SetDefault
+
+# Optional: register winc:// so DSH's "open in app" menu can hand folders to Winc
+.\bin\winc\url-handler.ps1
+```
+
+`file-associations.ps1` accepts `-Extensions '.foo', '.bar'` to extend the built-in list. On Windows 11 the context-menu entry appears under **Show more options** (Shift+F10), because the script registers a classic verb rather than the new `IExplorerCommand` package.
+
+For the DSH side, the URL handler pairs with a custom editor in **Settings → Side card → Open with**: name `Winc`, template `winc://open/?path={path}`, VSCode family off. The handler maps WSL paths to `\\wsl.localhost\<distro>\...`, so folders inside WSL open directly.
+
 ## Update
 
 Update Scoop and the local bucket clone:
