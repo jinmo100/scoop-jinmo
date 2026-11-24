@@ -1,5 +1,5 @@
 {
-    "version": "0.33.0",
+    "version": "0.34.0",
     "description": "Unofficial Tauri desktop client for DeepSeek Harness (DSH), with a managed runtime and preset plugins",
     "homepage": "https://github.com/dsh-tauri/deepseek-harness-desktop",
     "license": {
@@ -8,8 +8,8 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.33.0/Deepseek.Harness.Desktop_0.33.0_x64_en-US.msi",
-            "hash": "ebf364772169fbc17c4bbf2b564acdb7b7a33a1014a79642f0c85114e13b441d"
+            "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.34.0/Deepseek.Harness.Desktop_0.34.0_x64_en-US.msi",
+            "hash": "3cb4d30bdb0baf86e54061c42db95a3d034a3d3a64d2b57dc200a5d16be17921"
         }
     },
     "extract_dir": "PFiles\\DSH Tauri",
